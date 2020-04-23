@@ -186,29 +186,38 @@ namespace ChlebnyWindowsFormsPWSG
 
 
             bool isWall = false;
-            StringBuilder sb = new StringBuilder();
-            switch (selected)
+            //StringBuilder sb = new StringBuilder();
+            //switch (selected)
+            //{
+            //    case 1:
+            //        sb.Append("Chairs");
+            //        break;
+            //    case 2:
+            //        sb.Append("Double Bed");
+            //        break;
+            //    case 3:
+            //        sb.Append("Sofa");
+            //        break;
+            //    case 4:
+            //        sb.Append("Table");
+            //        break;
+            //    case 5:
+            //        sb.Append("Wall");
+            //        isWall = true;
+            //        spareBitmap = (Bitmap)bitmap.Clone();
+            //        pictureBox1.MouseMove += MouseMoveDrawWall;
+            //        break;
+            //    default:
+            //        return;
+            //}
+            if (selected == 0)
+                return;
+
+            if (selected == 5)
             {
-                case 1:
-                    sb.Append("Chairs");
-                    break;
-                case 2:
-                    sb.Append("Double Bed");
-                    break;
-                case 3:
-                    sb.Append("Sofa");
-                    break;
-                case 4:
-                    sb.Append("Table");
-                    break;
-                case 5:
-                    sb.Append("Wall");
-                    isWall = true;
-                    spareBitmap = (Bitmap)bitmap.Clone();
-                    pictureBox1.MouseMove += MouseMoveDrawWall;
-                    break;
-                default:
-                    return;
+                isWall = true;
+                spareBitmap = (Bitmap)bitmap.Clone();
+                pictureBox1.MouseMove += MouseMoveDrawWall;
             }
             if (bitmap == null)
             {
@@ -219,7 +228,7 @@ namespace ChlebnyWindowsFormsPWSG
             }
 
             RoomItem Item = new RoomItem( selected-1, sourcelist[selected-1].name, e.Location, source, isWall);
-            sb.Append(e.Location.ToString());
+            //sb.Append(e.Location.ToString());
 
             items.Add(Item);
             if (selected != 0 && selected != 5)
@@ -449,10 +458,7 @@ namespace ChlebnyWindowsFormsPWSG
                             foreach (RoomItem ri in items)
                             {
                                 ri.updateNames(sourcelist);
-                                ri.Source = sourcelist
-                                      .Where(x => x.name == ri.Name)
-                                      .FirstOrDefault()
-                                      .source;
+                                ri.Source = sourcelist[ri.source_id].source;
                                 ri.DeSerialize();
                             }
                         }
