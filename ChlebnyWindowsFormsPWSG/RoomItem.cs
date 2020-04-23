@@ -17,6 +17,7 @@ namespace ChlebnyWindowsFormsPWSG
     public class RoomItem
     {
         private static int id_counter = 0;
+        public Size bitmapSize { get; set; }
         public string Name { get; set; }
         public Point Center { get; set; }
         public int id { get; private set; }
@@ -24,18 +25,6 @@ namespace ChlebnyWindowsFormsPWSG
         [NonSerialized]
         public Image Source;
 
-
-        //public Image Source
-        //{
-        //    get
-        //    {
-        //        return _source;
-        //    }
-        //    set
-        //    {
-        //        _source = value;
-        //    }
-        //}
         public List<Point> points
         {
             get

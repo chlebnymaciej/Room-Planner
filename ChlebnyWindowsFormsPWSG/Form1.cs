@@ -417,6 +417,10 @@ namespace ChlebnyWindowsFormsPWSG
                     if ((file = s.OpenFile()) != null)
                     {
                         BinaryFormatter binaryFormatter = new BinaryFormatter();
+                        foreach (RoomItem item in items)
+                        {
+                            item.bitmapSize = bitmap.Size;
+                        }
                         binaryFormatter.Serialize(file, items);
                         file.Close();
                     }
@@ -451,6 +455,11 @@ namespace ChlebnyWindowsFormsPWSG
                                       .source;
                                 ri.DeSerialize();
                             }
+                        }
+                        if (items.First() != null)
+                        {
+                            bitmap = DrawFilledRectangle(items.First().bitmapSize.Width, items.First().bitmapSize.Height);
+                            pictureBox1.Image = bitmap;
                         }
                         pictureBox1.Refresh();
                         ListOfItems.DataSource = items;
