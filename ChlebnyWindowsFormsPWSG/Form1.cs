@@ -71,6 +71,8 @@ namespace ChlebnyWindowsFormsPWSG
         private void ChangeLanguage(string lang = "en")
         {
             Controls.Clear();
+            select = null;
+            selected = 0;
             CultureInfo culture = CultureInfo.GetCultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
@@ -442,12 +444,12 @@ namespace ChlebnyWindowsFormsPWSG
 
                             foreach (RoomItem ri in items)
                             {
+                                ri.updateNames(sourcelist);
                                 ri.Source = sourcelist
                                       .Where(x => x.name == ri.Name)
                                       .FirstOrDefault()
                                       .source;
                                 ri.DeSerialize();
-                                ri.updateNames(sourcelist);
                             }
                         }
                         pictureBox1.Refresh();
@@ -479,6 +481,11 @@ namespace ChlebnyWindowsFormsPWSG
         private void englishToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ChangeLanguage("en");
+        }
+
+        private void RoomPlanner_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -245,6 +245,7 @@
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RoomPlanner";
+            this.Load += new System.EventHandler(this.RoomPlanner_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.RoomPlanner_KeyUp);
             this.Resize += new System.EventHandler(this.RoomPlanner_Resize);
             this.splitContainer1.Panel1.ResumeLayout(false);
