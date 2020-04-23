@@ -38,6 +38,7 @@ namespace ChlebnyWindowsFormsPWSG
         private Point lastPosition;
         private (string name, Image source)[] sourcelist;
         private GraphicsPath spareGP = new GraphicsPath();
+        private Size lastSize;
         public RoomPlanner()
         {
             CultureInfo culture = CultureInfo.GetCultureInfo("pl-PL");
@@ -57,7 +58,7 @@ namespace ChlebnyWindowsFormsPWSG
             items.RaiseListChangedEvents = true;
             ListOfItems.DataSource = items;
             ResourceManager m = new ResourceManager(typeof(RoomPlanner));
-
+            this.lastSize = this.Size;
             sourcelist = new (string name, Image source)[]
             {
                 (m.GetString("chairs1"),chairsB.BackgroundImage),
@@ -70,6 +71,8 @@ namespace ChlebnyWindowsFormsPWSG
 
         private void ChangeLanguage(string lang = "en")
         {
+            this.lastSize = this.Size;
+
             Controls.Clear();
             select = null;
             selected = 0;
@@ -78,7 +81,9 @@ namespace ChlebnyWindowsFormsPWSG
             Thread.CurrentThread.CurrentCulture = culture;
 
             InitializeComponent();
-            bitmap = DrawFilledRectangle(imagePanel.Width, imagePanel.Height);
+            this.Size = lastSize;
+            this.lastSize = this.Size;
+
             pictureBox1.Image = bitmap;
             pictureBox1.MouseWheel += MouseWheelEventHandler;
             wallPen.MiterLimit = 1.0f;
